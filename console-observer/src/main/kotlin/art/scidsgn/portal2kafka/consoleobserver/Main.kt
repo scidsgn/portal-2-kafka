@@ -29,24 +29,23 @@ suspend fun main(args: Array<String>) {
         observer.observe { chunk ->
             if (configuration.log.console) {
                 PrettyLog.logChunkInfo(chunk)
-                println(chunk)
             }
 
             parser.parseChunk(chunk).map { event ->
+                if (configuration.log.events) {
+                    PrettyLog.logEventInfo(event)
+                }
+
                 async {
-                    if (configuration.log.events) {
-                        PrettyLog.logEventInfo(event)
+
+                    client.post {
+                        url(configuration.endpoint)
+                        contentType(ContentType.Application.Json)
+                        setBody(event)
                     }
 
                     if (configuration.log.requests) {
-                        client.post {
-                            url(configuration.endpoint)
-                            contentType(ContentType.Application.Json)
-                            setBody(event)
-                        }
-
-                        PrettyLog.logRequestInfo(configuration.endpoint)
-                        println(Json.encodeToString(event))
+                        PrettyLog.logRequestInfo(configuration.endpoint, Json.encodeToString(event))
                     }
                 }
             }

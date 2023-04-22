@@ -10,14 +10,16 @@ class PrettyLog {
 
         fun logChunkInfo(chunk: String) {
             log("CHUNK", "Received chunk of length ${chunk.length}", Color.BgPurple)
+            println(chunk)
         }
 
         fun logEventInfo(event: PortalEvent) {
             log("EVENT", event.toString(), Color.BgCyan)
         }
 
-        fun logRequestInfo(endpoint: String) {
-            log("REQUEST", endpoint, Color.BgGreen)
+        fun logRequestInfo(endpoint: String, body: String) {
+            log("REQUEST", "POST $endpoint", Color.BgGreen)
+            println(body)
         }
     }
 
