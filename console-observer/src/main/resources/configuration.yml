@@ -1,0 +1,6 @@
+gamePath: C:\Program Files (x86)\Steam\steamapps\common\Portal 2\portal2
+endpoint: http://localhost:8080/portal
+log:
+  console: false
+  events: true
+  requests: false
