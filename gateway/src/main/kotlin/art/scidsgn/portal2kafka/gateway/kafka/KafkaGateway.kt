@@ -5,9 +5,9 @@ import org.apache.kafka.clients.admin.NewTopic
 import org.springframework.kafka.core.KafkaTemplate
 import org.springframework.kafka.support.KafkaHeaders
 import org.springframework.messaging.support.MessageBuilder
-import org.springframework.stereotype.Service
+import org.springframework.stereotype.Component
 
-@Service
+@Component
 class KafkaGateway(val gatewayTopic: NewTopic, val kafkaTemplate: KafkaTemplate<String, PortalEventDto>) {
 
     fun send(eventDto: PortalEventDto) {
